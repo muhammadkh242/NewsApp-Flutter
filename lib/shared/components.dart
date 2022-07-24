@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget buildNewsItem() {
+Widget buildNewsItem(article) {
+  print("article -------> ${article['title']}");
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Column(
@@ -8,15 +9,15 @@ Widget buildNewsItem() {
       children: [
         Container(
           height: 140.0,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15.0),
               topLeft: Radius.circular(15.0),
             ),
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                'https://heute-at-prod-images.imgix.net/2022/07/22/793e2af2-d59e-42a6-bbbd-0df3626b1894.jpeg'
+                "${article['urlToImage']}",
               )
             )
           ),
@@ -24,9 +25,9 @@ Widget buildNewsItem() {
         const SizedBox(
           height: 10.0,
         ),
-        const Text(
-          "CHINA LAUNCHES WENTIAN SPACE STATION MODULE WITH GIANT ROCKET - NEW YORK TIMES",
-          style: TextStyle(
+        Text(
+          "${article['title']}",
+          style: const TextStyle(
         fontSize: 18.0,
         fontWeight: FontWeight.w800,
           ),
@@ -38,19 +39,20 @@ Widget buildNewsItem() {
         ),
         Row(
           children: [
-            const Text(
-              "Kenneth Chang, Jane",
-              style: TextStyle(
-                color: Colors.teal,
-                fontSize: 18.0,
-                fontStyle: FontStyle.italic
+            Expanded(
+              child: Text(
+                "${article['author']}",
+                style: const TextStyle(
+                  color: Colors.teal,
+                  fontSize: 18.0,
+                  fontStyle: FontStyle.italic
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            const SizedBox(
-              width: 50.0,
-            ),
             Text(
-                "2022-07-24",
+                article['publishedAt'].toString().substring(0,10),
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 18.0,
@@ -62,15 +64,13 @@ Widget buildNewsItem() {
         const SizedBox(
           height: 20.0,
         ),
-        Expanded(
-          child: Text(
-              "description description description description description description description description description description description description description description description description",
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 14.0
-            ),
+        Text(
+          "${article['description']}",
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 14.0
           ),
         ),
 
