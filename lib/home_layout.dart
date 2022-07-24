@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/network/dio_helper.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
 
@@ -11,19 +12,26 @@ class HomeLayout extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (BuildContext context, state){},
-        builder: (BuildContext context, state){
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, state) {
           var cubit = AppCubit.get(context);
+          DioHelper.getNews(url: "v2/top-headlines", query: {
+            'country': 'us',
+            'category': 'general',
+            'apiKey': 'a1c2f37b0a744dcf9026ae1e1bcee545'
+          }).then((value)
+          {
+            print(value);
+          });
           return Scaffold(
             appBar: AppBar(
               title: const Text(
-                  'News',
+                'News',
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: cubit.bottomNavIndex,
-              onTap: (index)
-              {
+              onTap: (index) {
                 cubit.navigateBottomNavScreen(index);
               },
               items: const [
@@ -47,4 +55,3 @@ class HomeLayout extends StatelessWidget {
     );
   }
 }
-

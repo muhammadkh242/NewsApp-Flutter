@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/home_layout.dart';
+import 'package:news/network/dio_helper.dart';
 
 void main() {
+
+  DioHelper.init();
   runApp(const MyApp());
 }
 
