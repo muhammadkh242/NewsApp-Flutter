@@ -14,14 +14,6 @@ class HomeLayout extends StatelessWidget {
         listener: (BuildContext context, state) {},
         builder: (BuildContext context, state) {
           var cubit = AppCubit.get(context);
-/*          DioHelper.getNews(url: "v2/top-headlines", query: {
-            'country': 'us',
-            'category': 'general',
-            'apiKey': 'a1c2f37b0a744dcf9026ae1e1bcee545'
-          }).then((value)
-          {
-            print(value);
-          });*/
           return Scaffold(
             appBar: AppBar(
               title: const Text(
