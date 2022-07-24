@@ -20,9 +20,17 @@ class AppCubit extends Cubit<AppStates> {
   int bottomNavIndex = 0;
 
   List<dynamic> homeNews = [];
+  List<dynamic> businessNews = [];
+  List<dynamic> sportsNews = [];
+
 
   void navigateBottomNavScreen(int index){
     bottomNavIndex = index;
+    if(index == 1){
+      getBusinessNews();
+    }else if (index == 2){
+      getSportsNews();
+    }
     emit(AppBottomNavState());
   }
 
@@ -35,13 +43,55 @@ class AppCubit extends Cubit<AppStates> {
     }).then((value)
     {
       homeNews = value.data['articles'];
-      //print(homeNews);
-      //print(homeNews[0]['title']);
       emit(HomeSuccess());
     }).catchError((error)
     {
       print(error.toString());
       emit(HomeError());
     });
+  }
+
+  void getBusinessNews(){
+    if(businessNews.isEmpty){
+      emit(BusinessLoading());
+      DioHelper.getNews(url: "v2/top-headlines", query: {
+        'country': 'us',
+        'category': 'business',
+        'apiKey': 'a1c2f37b0a744dcf9026ae1e1bcee545'
+      }).then((value)
+      {
+        businessNews = value.data['articles'];
+        emit(BusinessSuccess());
+      }).catchError((error)
+      {
+        print(error.toString());
+        emit(BusinessError());
+      });
+    } else{
+      emit(BusinessSuccess());
+    }
+
+  }
+
+  void getSportsNews(){
+    if(sportsNews.isEmpty){
+      emit(SportsLoading());
+      DioHelper.getNews(url: "v2/top-headlines", query: {
+        'country': 'us',
+        'category': 'sports',
+        'apiKey': 'a1c2f37b0a744dcf9026ae1e1bcee545'
+      }).then((value)
+      {
+        sportsNews = value.data['articles'];
+        emit(SportsSuccess());
+      }).catchError((error)
+      {
+        print(error.toString());
+        emit(SportsError());
+      });
+    } else {
+      emit(SportsSuccess());
+    }
+
   }
 }

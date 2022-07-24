@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:news/model/news_response.dart';
 
 class DioHelper {
   static late Dio dio;

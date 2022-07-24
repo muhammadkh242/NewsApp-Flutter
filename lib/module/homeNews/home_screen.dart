@@ -15,27 +15,7 @@ class HomeScreen extends StatelessWidget {
       listener: (BuildContext context, state){},
       builder: (BuildContext context, state){
         var list = AppCubit.get(context).homeNews;
-        return ConditionalBuilder(
-            condition: list.isNotEmpty,
-            builder: (context) => ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (BuildContext context, index) {
-              return buildNewsItem(list[index]);
-            },
-            separatorBuilder: (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 2.0,
-                  color: Colors.grey[300],
-                ),
-              );
-            },
-            itemCount: list.length
-            ),
-            fallback: (context) => const Center(child: CircularProgressIndicator(),),
-        );
+        return buildScreen(list);
       },
     );
   }

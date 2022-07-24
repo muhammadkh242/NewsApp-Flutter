@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 
 Widget buildNewsItem(article) {
@@ -76,5 +77,30 @@ Widget buildNewsItem(article) {
 
       ],
     ),
+  );
+}
+
+
+Widget buildScreen(list){
+  return ConditionalBuilder(
+    condition: list.isNotEmpty,
+    builder: (context) => ListView.separated(
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (BuildContext context, index) {
+          return buildNewsItem(list[index]);
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Container(
+              width: double.infinity,
+              height: 2.0,
+              color: Colors.grey[300],
+            ),
+          );
+        },
+        itemCount: list.length
+    ),
+    fallback: (context) => const Center(child: CircularProgressIndicator(),),
   );
 }
