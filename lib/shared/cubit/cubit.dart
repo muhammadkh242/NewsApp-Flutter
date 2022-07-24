@@ -23,6 +23,7 @@ class AppCubit extends Cubit<AppStates> {
   List<dynamic> businessNews = [];
   List<dynamic> sportsNews = [];
 
+  bool isDark = false;
 
   void navigateBottomNavScreen(int index){
     bottomNavIndex = index;
@@ -93,5 +94,10 @@ class AppCubit extends Cubit<AppStates> {
       emit(SportsSuccess());
     }
 
+  }
+
+  void changeAppTheme(){
+    isDark = !isDark;
+    emit(ChangeTheme());
   }
 }

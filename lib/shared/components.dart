@@ -1,7 +1,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 
-Widget buildNewsItem(article) {
+Widget buildNewsItem(article, context) {
   print("article -------> ${article['title']}");
   return Padding(
     padding: const EdgeInsets.all(20.0),
@@ -28,10 +28,7 @@ Widget buildNewsItem(article) {
         ),
         Text(
           "${article['title']}",
-          style: const TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w800,
-          ),
+          style: Theme.of(context).textTheme.bodyText1,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -87,7 +84,7 @@ Widget buildScreen(list){
     builder: (context) => ListView.separated(
         physics: const BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, index) {
-          return buildNewsItem(list[index]);
+          return buildNewsItem(list[index], context);
         },
         separatorBuilder: (BuildContext context, index) {
           return Padding(

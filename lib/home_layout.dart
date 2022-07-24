@@ -19,6 +19,25 @@ class HomeLayout extends StatelessWidget {
               title: const Text(
                 'News',
               ),
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.search,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.brightness_4_outlined,
+                  ),
+                  onPressed: ()
+                  {
+                    AppCubit.get(context).changeAppTheme();
+                    print(cubit.isDark);
+                  },
+                ),
+
+              ],
             ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: cubit.bottomNavIndex,

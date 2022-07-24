@@ -15,3 +15,6 @@ class BusinessLoading extends AppStates {}
 class SportsSuccess extends AppStates {}
 class SportsError extends AppStates {}
 class SportsLoading extends AppStates {}
+
+class ChangeTheme extends AppStates {}
+
