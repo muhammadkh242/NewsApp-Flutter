@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/model/news_response.dart';
 import 'package:news/network/dio_helper.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
@@ -49,6 +50,7 @@ class HomeLayout extends StatelessWidget {
                 ),
               ],
             ),
+            body: cubit.pages[cubit.bottomNavIndex],
           );
         },
       ),
