@@ -1,7 +1,7 @@
 # NewsApp
 Cross-platform mobile application built with Flutter.
 
-## Tool
+## Tools
 
 - Bloc.
 - Dio.
