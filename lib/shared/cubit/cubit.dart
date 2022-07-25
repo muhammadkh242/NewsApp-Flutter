@@ -5,6 +5,7 @@ import 'package:news/module/businessNews/business_screen.dart';
 import 'package:news/module/homeNews/home_screen.dart';
 import 'package:news/module/sportsNews/sports_screen.dart';
 import 'package:news/network/dio_helper.dart';
+import 'package:news/preferences/preferences.dart';
 import 'package:news/shared/cubit/states.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -96,8 +97,19 @@ class AppCubit extends Cubit<AppStates> {
 
   }
 
-  void changeAppTheme(){
-    isDark = !isDark;
-    emit(ChangeTheme());
+  void changeAppTheme({required bool fromMain}){
+    if(fromMain){
+      print("in if");
+      isDark = PreferencesHelper.getPreferences(key: "isDark") ?? false;
+      emit(ChangeTheme());
+
+    }else{
+      print("in else");
+      isDark = !isDark;
+      PreferencesHelper.putPreferences(key: "isDark", value: isDark).then((value)
+      {
+        emit(ChangeTheme());
+      });
+    }
   }
 }

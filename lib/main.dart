@@ -4,12 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:news/home_layout.dart';
 import 'package:news/network/dio_helper.dart';
+import 'package:news/preferences/preferences.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
   DioHelper.init();
-  runApp(const MyApp());
+  await PreferencesHelper.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,11 +23,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit(),
+      create: (BuildContext context) => AppCubit()..getHomeNews()..changeAppTheme(
+        fromMain: true
+      ),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          print("is dark from cubit ${AppCubit.get(context).isDark}");
+
           return MaterialApp(
+
             theme: ThemeData(
                 primarySwatch: Colors.teal,
                 appBarTheme: const AppBarTheme(
