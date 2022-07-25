@@ -8,7 +8,7 @@ import 'package:news/preferences/preferences.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
@@ -22,16 +22,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit()..getHomeNews()..changeAppTheme(
-        fromMain: true
-      ),
+      create: (BuildContext context) => AppCubit()
+        ..getHomeNews()
+        ..changeAppTheme(fromMain: true),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           print("is dark from cubit ${AppCubit.get(context).isDark}");
 
           return MaterialApp(
-
             theme: ThemeData(
                 primarySwatch: Colors.teal,
                 appBarTheme: const AppBarTheme(
@@ -90,8 +89,9 @@ class MyApp extends StatelessWidget {
                   fontSize: 18.0,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
-                ))),
-            themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+                ),)),
+            themeMode:
+                AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
             debugShowCheckedModeBanner: false,
             home: const HomeLayout(),
           );

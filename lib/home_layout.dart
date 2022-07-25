@@ -22,18 +22,11 @@ class HomeLayout extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(
-                  Icons.search,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
                   Icons.brightness_4_outlined,
                 ),
                 onPressed: ()
                 {
                   cubit.changeAppTheme(fromMain: false);
-                  print(cubit.isDark);
                 },
               ),
 

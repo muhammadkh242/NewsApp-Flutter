@@ -14,7 +14,7 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
 
   List<Widget> pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const BusinessScreen(),
     const SportsScreen()
   ];
@@ -51,6 +51,27 @@ class AppCubit extends Cubit<AppStates> {
       print(error.toString());
       emit(HomeError());
     });
+  }
+
+  void getSearchNews({required String searchValue}){
+    if(searchValue.isEmpty){
+      getHomeNews();
+    } else{
+      emit(HomeLoading());
+      DioHelper.getNews(url: "v2/everything", query: {
+        'q': searchValue,
+        'apiKey': 'a1c2f37b0a744dcf9026ae1e1bcee545'
+      }).then((value)
+      {
+        homeNews = value.data['articles'];
+        emit(HomeSuccess());
+      }).catchError((error)
+      {
+        print(error.toString());
+        emit(HomeError());
+      });
+    }
+
   }
 
   void getBusinessNews(){
