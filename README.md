@@ -1,5 +1,5 @@
 # NewsApp
-Cross-platform mobile application built with Flutter.
+Simple cross-platform mobile application built with Flutter.
 
 ## Tools
 
