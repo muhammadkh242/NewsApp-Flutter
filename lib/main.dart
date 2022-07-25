@@ -7,7 +7,6 @@ import 'package:news/network/dio_helper.dart';
 import 'package:news/preferences/preferences.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
