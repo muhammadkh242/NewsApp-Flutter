@@ -28,8 +28,6 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          print("is dark from cubit ${AppCubit.get(context).isDark}");
-
           return MaterialApp(
             theme: ThemeData(
                 primarySwatch: Colors.teal,
